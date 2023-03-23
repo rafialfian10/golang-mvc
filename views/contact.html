@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+    <link rel="icon" href="public/assets/img/logo.png">
+    <link rel="stylesheet" href="public/css/contact.css">
+</head>
+<body>
+      <!-- Navbar -->
+      <nav class="navbar">
+        <div class="menu-toggle">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li class="logo"><img src="public/assets/img/logo.png"></li>
+            <li><a href="/">Home</a></li>
+            {{if .Login.IsLogin}}
+            <li><a href="/project" class="">My Project</a></li>
+            {{end}}
+            <div class="sub-navbar">
+                {{if .Login.IsLogin}}
+                <li class="register"><a href="">Hello, {{.Login.Name}} </a></li>
+                <li class="login"><a href="/logout" onclick="return confirm('Are you sure?')">Logout</a></li>
+                {{else}}
+                <li class="register"><a href="/register">Register</a></li>
+                <li class="login"><a href="/login">Login</a></li>
+                {{end}}
+                <li class="liContact"><a href="/contact" class="aContact">Contact Me</a></li>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Form -->
+    <div class="form-container">
+        <h2>GET IN TOUCH</h2>
+        <form onsubmit="submitData(event)">
+            <label for="name">Name</label>
+            <input type="text" class="border-color" id="input-name">
+            <label for="email">Email</label>
+            <input type="email" class="border-color" id="input-email">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="border-color" id="input-phone">
+            <label for="subject">Subject</label>
+            <select class="border-color" id="input-subject">
+                <option>Let's Talk</option>
+                <option>Let's Collaboration</option>
+                <option>I am Hiring</option>
+            </select>
+            <label for="message">Message</label>
+            <textarea class="border-color" id="input-message"></textarea>
+            <div class="btn-submit">
+                <button type="submit" id="btn-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="public/js/contact.js"></script>
+</body>
+</html>

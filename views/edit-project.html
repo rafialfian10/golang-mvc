@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my-profile-pages</title>
+    <link rel="icon" href="/public/assets/img/logo.png">
+    <link rel="stylesheet" href="/public/css/project.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="menu-toggle">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li class="logo"><img src="/public/assets/img/logo.png"></li>
+            <li><a href="/" class="">Home</a></li>
+            <li><a href="/project" class="active">My Project</a></li>
+            <li><a href="" class="">About</a></li>
+            <li class="liContact"><a href="/contact" class="aContact">Contact Me</a></li>
+        </ul>
+    </nav>
+    <!-- End navbar -->
+
+    <!-- Messade Box -->
+    {{if .pesan}}
+        <div class="message">{{.pesan}}</div>
+    {{end}}
+    <!-- End message box --> 
+
+    <!-- add project -->
+    <section>
+        <div class="form-container" >
+            <h2>UPDATE MY PROJECT</h2>
+            <form action="/edit-project/{{.Project.Id}}" method="POST" id="form-project" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{{.Project.Id}}">
+                <label for="project-name">Project Name</label>
+                <input type="text" name="projectName" id="projectName" class="border-color" value="{{.Project.ProjectName}}">
+    
+                <div class="date">
+                    <label for="start-date" class="label-1">Start Date</label>
+                    <input type="date" name="startDate" id="startDate" class="start-date border-color" value="{{.Project.StartDate}}">
+                    <label for="end-date" class="label-2">End Date</label>
+                    <input type="date" name="endDate" id="endDate" class="end-date border-color" value="{{.Project.EndDate}}">
+                </div>
+    
+                <label for="desc">Description</label>
+                <textarea name="desc" id="desc" class="border-color">{{.Project.Desc}}</textarea>
+                
+                <label for="tech">Technologies</label>
+                <!-- Buat variabel berisi string kosong -->
+                {{$node := ""}} {{$angular := ""}} {{$react := ""}} {{$typescript := ""}}
+                <!-- Kemudian looping checkboxs, lalu buat kondisi jika checkbox terdapat value maka isi string dengan checked -->
+                {{range $i, $icon := .Project.Tech}}
+                    {{if eq $icon "node"}} {{$node = "checked"}}
+                    {{else if eq $icon "angular"}} {{$angular = "checked"}}
+                    {{else if eq $icon "react"}} {{$react = "checked"}}
+                    {{else if eq $icon "typescript"}} {{$typescript = "checked"}}
+                    {{end}}
+                {{end}}
+                <div class="checkbox-1">
+                    <input type="checkbox" name="node" value="node" id="node" class="mycheckbox" {{$node}}>
+                    <label for="node">Node JS</label>
+                    <input type="checkbox" name="angular" value="angular" id="angular" class="mycheckbox" {{$angular}}>
+                    <label for="angular">Angular JS</label>
+                </div>
+                <div class="checkbox-2">
+                    <input type="checkbox" name="react" value="react" id="react" class="mycheckbox" {{$react}}>
+                    <label for="react">React JS</label>
+                    <input type="checkbox" name="typescript" value="typescript" id="typescript" class="mycheckbox" {{$typescript}}>
+                    <label for="typescript">TypeScript</label>
+                </div>
+                
+                <label>Upload Image</label>
+                <div class="img-upload">
+                    <label for="image" class="border-color">
+                        <p>choose</p>
+                        <img src="/public/assets/img/attachment.png"/>
+                    </label>
+                    <input type="file" name="image" id="image" value="/uploads/{{.Project.Image}}" required>
+                </div>
+    
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+        </div>
+    </section> 
+    <!-- End add project -->
+    <script src="/public/js/project.js"></script>
+</body>
+</html>

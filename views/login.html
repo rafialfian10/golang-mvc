@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="icon" href="/public/assets/img/logo.png">
+    <link rel="stylesheet" href="public/css/login.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="menu-toggle">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li class="logo"><img src="public/assets/img/logo.png"></li>
+            <li><a href="/" class="">Home</a></li>
+            {{if .Login.IsLogin}}
+            <li><a href="/project" class="">My Project</a></li>
+            {{end}}
+            <div class="sub-navbar">
+                <li class="register"><a href="/register">Register</a></li>
+                <li class="login"><a href="/login" class="active">Login</a></li>
+                <li class="liContact"><a href="/contact" class="aContact">Contact Me</a></li>
+            </div>
+        </ul>
+    </nav>
+    <!-- End navbar -->
+
+    <!-- Message -->
+    {{if .Login.FlashData}}
+        <div class="message">{{.Login.FlashData}}</div>
+    {{end}}
+    <!-- End message -->
+
+    <!-- Message -->
+    {{if .Error.FlashData}}
+        <div class="message">{{.Error.FlashData}}</div>
+    {{end}}
+    <!-- End message -->
+
+    <!-- Form register -->
+    <section>
+        <div class="login-container">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="email border-color" name="email">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="password border-color" name="password">
+
+                <div class="btn-submit">
+                    <button type="submit" id="btn-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- End register -->
+</body>
+<script src="public/js/login.js"></script>
+</html>
